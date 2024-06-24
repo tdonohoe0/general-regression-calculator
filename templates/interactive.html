@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive page</title>
+</head>
+<body>
+    {% if dv %}
+    <div id="content">
+        {{ dv }}
+    </div>
+    {% else %}
+    <div id="content">
+        No dependent var!
+    </div>
+    {% endif %} 
+    <div id="form-container"></div>
+    {% if iv %}
+    <script type="module">
+        let indpenent_vars = {{ iv|tojson }};
+        import { build } from '../static/interactive.js';
+        build(indpenent_vars);
+    </script>
+    {% endif %}
+
+    <img src="data:image/png;base64,{{ img_data }}" alt="my plot", id="{{ vars }}"">
+</body>
+
+</html>
